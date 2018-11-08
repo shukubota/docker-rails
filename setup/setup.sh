@@ -145,7 +145,21 @@ bundle install --path vendor/bundle
 source ~/.bash_profile
 
 # node 入れる
+curl -L git.io/nodebrew | perl - setup
+echo 'export PATH=$HOME/.nodebrew/current/bin:$PATH' >> ~/.bash_profile
+source ~/.bash_profile
+cd /work/project
+nodebrew install-binary v11.0.0
+nodebrew install v11.0.0
+nodebrew use v11.0.0
+source ~/.bash_profile
 
+# database作る
+cd /work/project
+bundle exec rake db:create
+# mysql再起動する
+sudo /etc/init.d/mysqld restart
+source ~/.bash_profile
 
 
 #rbenv rehash
